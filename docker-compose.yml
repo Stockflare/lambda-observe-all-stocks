@@ -1,0 +1,6 @@
+observe:
+  build: .
+  volumes:
+    - .:/stockflare
+  # env_file:
+  #   - ./.env
