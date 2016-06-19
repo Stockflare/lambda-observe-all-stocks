@@ -32,16 +32,14 @@ exports.handler = function(event, context) {
         var get_sics = function(page) {
           return when.promise(function(resolve, reject, notify){
             var search_body = _.extend(event.search_body, {page: page, select: "sic"});
-            rest.put(event.search_url, {
-              data: JSON.stringify(search_body),
-            }).on('success', function(data, response){
+            rest.putJson(event.search_url, search_body).on('success', function(data, response){
               if (data.length > 0) {
                 _.each(data, function(stock){
                   sics.push(stock.sic);
                 });
               }
-              console.log('Got page: ' + page);
-              console.log('Total Rics: ' + sics.length);
+              // console.log('Got page: ' + page);
+              // console.log('Total Sics: ' + sics.length);
               total_pages = parseInt(response.headers['x-api-pages']);
               resolve();
             }).on('fail', function(data, response){
@@ -68,7 +66,7 @@ exports.handler = function(event, context) {
     1)
     .done(function(){
       // Got all the sics, now set up the observes in chunks of 10
-      var chunks = _l.chunk(sics, 10000);
+      var chunks = _l.chunk(sics, 100);
 
       when.iterate(function(index){
         return index + 1;
@@ -87,9 +85,8 @@ exports.handler = function(event, context) {
                 sic: sic,
                 language: 'en'
               };
-              rest.postJson(event.search_url, params)
+              rest.postJson(event.alerts_url, params)
               .on('success', function(data, response){
-                console.log('data');
                 console.log(data);
                 resolve();
               })

@@ -1,6 +1,6 @@
 {
-  "name": "lambda-sitemap-builder",
-  "description": "Build a sitemap based on Elasticsaearch index",
+  "name": "lambda-observe-all-stocks",
+  "description": "Lambda function that observes all stocks from a search query",
   "version": "0.0.1",
   "private": "true",
   "dependencies": {

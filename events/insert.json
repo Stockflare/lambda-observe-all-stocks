@@ -1,6 +1,6 @@
 {
   "identity": "us-east-1:e4ecbb5c-7c33-46ae-951d-f109dba401bf",
-  "search_url": "https://api.stocktio.com/search/filter",
+  "search_url": "http://search.internal-stocktio.com/filter",
   "alerts_url": "http://alerts.internal-stocktio.com/observe",
   "search_body": {
     "conditions": {
